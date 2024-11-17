@@ -151,10 +151,10 @@ public:
     uint8_t flask_times[6]; // health: N, E, S, W; mana: NW, SE
     void update_flask_timers();
 
-    std::vector<StackFrame> gen_aggressive();
-    std::vector<StackFrame> gen_defensive();
-    std::vector<StackFrame> gen_sustaining();
-    std::vector<StackFrame> gen_strategic();
+    std::vector<StackFrame> gen_aggressive(StackFrame &prev);
+    std::vector<StackFrame> gen_defensive(StackFrame &prev);
+    std::vector<StackFrame> gen_sustaining(StackFrame &prev);
+    std::vector<StackFrame> gen_strategic(StackFrame &prev);
 
     std::vector<StackFrame> gen_frames(StackFrame &prev); // calls other gens and does pruning
 

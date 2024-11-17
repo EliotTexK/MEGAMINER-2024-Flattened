@@ -202,19 +202,19 @@ std::vector<Tile> AI::find_path(const Tile& start, const Tile& goal)
 // You can add additional methods here for your AI to call
 //<<-- /Creer-Merge: methods -->>
 
-std::vector<StackFrame> AI::gen_aggressive() {
+std::vector<StackFrame> AI::gen_aggressive(StackFrame &prev) {
 
 }
 
-std::vector<StackFrame> AI::gen_defensive() {
+std::vector<StackFrame> AI::gen_defensive(StackFrame &prev) {
 
 }
 
-std::vector<StackFrame> AI::gen_sustaining() {
+std::vector<StackFrame> AI::gen_sustaining(StackFrame &prev) {
 
 }
 
-std::vector<StackFrame> AI::gen_strategic() {
+std::vector<StackFrame> AI::gen_strategic(StackFrame &prev) {
 
 }
 

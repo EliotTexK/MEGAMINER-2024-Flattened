@@ -11,6 +11,7 @@
 
 #include "../../joueur/src/base_ai.hpp"
 #include "../../joueur/src/attr_wrapper.hpp"
+#include <array>
 
 // <<-- Creer-Merge: includes -->> - Code you add between this comment and the end comment will be preserved between Creer re-runs.
 // You can add additional #includes here
@@ -43,12 +44,13 @@ enum RuneType {
 struct StackFrame {
     int64_t value;
     bool is_my_turn;
-    Move move[5];
-    struct {
+    std::array<Move, 5> move;
+    struct WizardStats {
         uint8_t x, y;
         uint8_t hp, mp;
         bool is_slow;
-    } wizard, op;
+    };
+    WizardStats wizard, op;
     uint8_t flask_timers[6];
     uint8_t rune_info[8][8]; // three LSB are one of RuneType
     // rune_info[x][y] >> 3 is associated timeout

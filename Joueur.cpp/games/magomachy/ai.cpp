@@ -210,7 +210,32 @@ std::vector<StackFrame> AI::gen_defensive(StackFrame &curr) {
 
 }
 
+struct SusState {
+    int step = 0;
+    bool already_cast = false;
+    int moves_left = 2;
+};
+
+void gen_sustaining_submoves(std::vector<StackFrame> &dest, StackFrame curr, SusState state) {
+
+    auto &active = curr.is_my_turn ? curr.wizard : curr.op;
+    auto &affected = curr.is_my_turn ? curr.op : curr.wizard;
+
+    curr.move[state.step] = Move{ .type=MoveType.NOTHING };
+    ret.push_back(curr); // do nothing
+
+    if (moves_left > 0) {
+        move.type = /// 
+        curr.move[state.step] = Move{ MoveType.MOVE, affected.x, affected.y };
+    }
+
+}
+
 std::vector<StackFrame> AI::gen_sustaining(StackFrame &curr) {
+    std::vector<StackFrame> ret;
+
+    SusState state;
+    gen_sustaining_submoves(ret, curr, state);
 
 }
 

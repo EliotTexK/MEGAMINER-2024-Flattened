@@ -42,7 +42,7 @@ enum RuneType {
 
 struct StackFrame {
     int64_t value;
-    Move move;
+    Move move[5];
     struct {
         uint8_t x, y;
         uint8_t hp, mp;

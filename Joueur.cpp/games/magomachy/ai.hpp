@@ -38,7 +38,7 @@ enum RuneType {
     CHARGE,
     EXPLOSION,
     STONE,
-}
+};
 
 struct StackFrame {
     int64_t value;

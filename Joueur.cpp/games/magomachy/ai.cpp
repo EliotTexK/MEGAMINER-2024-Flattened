@@ -5,6 +5,7 @@
 #include <iostream>
 #include <random>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -200,6 +201,63 @@ std::vector<Tile> AI::find_path(const Tile& start, const Tile& goal)
 //<<-- Creer-Merge: methods -->> - Code you add between this comment and the end comment will be preserved between Creer re-runs.
 // You can add additional methods here for your AI to call
 //<<-- /Creer-Merge: methods -->>
+
+    std::vector<StackFrame> gen_aggressive() {
+
+    }
+
+    std::vector<StackFrame> gen_defensive() {
+
+    }
+
+    std::vector<StackFrame> gen_sustaining() {
+
+    }
+
+    std::vector<StackFrame> gen_strategic() {
+
+    }
+
+
+    static constexpr size_t TRUNC_SIZE = 100;
+    std::vector<StackFrame> gen_frames(StackFrame &prev){
+        std::vector<StackFrame> ret;
+        switch (our_type) {
+            case AGGRESSIVE:
+                ret = gen_aggressive();
+                break;
+            case DEFENSIVE:
+                ret = gen_defensive();
+                break;
+            case SUSTAINING:
+                ret = gen_sustaining();
+                break;
+            case STRATEGIC:
+                ret = gen_strategic();
+                break;
+        }
+        // get frame values
+        for (auto &frame : ret) {
+            evaluate_frame(frame);
+        }
+        // prune by truncating lowest values
+        std::sort(ret.begin(), ret.end(), 
+            [](StackFrame &item1, StackFrame &item2)->{
+                return item1.value > item2.value;
+            });
+        if (ret.size() > TRUNC_SIZE) {
+            ret.resize(TRUNC_SIZE);
+        }
+        return ret;
+    }
+
+    void evaluate_frame(StackFrame &frame) {
+        frame.value = 0;
+        frame.value += frame.wizard.hp;
+        frame.value += frame.wizard.mp;
+        frame.value -= frame.op.hp;
+        frame.value -= frame.op.mp;
+    }
 
 } // magomachy
 

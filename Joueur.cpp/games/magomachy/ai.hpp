@@ -22,6 +22,37 @@ namespace cpp_client
 namespace magomachy
 {
 
+enum MoveType : uint16_t {
+
+};
+
+struct Move {
+    MoveType type;
+    uint8_t x, y;
+};
+
+enum RuneType {
+    NOTHING,
+    HEAL,
+    TELEPORT,
+    CHARGE,
+    EXPLOSION,
+    STONE,
+}
+
+struct StackFrame {
+    int64_t value;
+    Move move;
+    struct {
+        uint8_t x, y;
+        uint8_t hp, mp;
+        bool is_slow;
+    } wizard, op;
+    uint8_t flask_timers[6];
+    uint8_t rune_info[8][8]; // three LSB are one of RuneType
+    // rune_info[x][y] >> 3 is associated timeout
+};
+
 /// <summary>
 /// This is the header file for building your Magomachy AI
 /// </summary>
@@ -109,6 +140,27 @@ public:
     // ####################
     // Don't edit these!
     // ####################
+
+
+    enum WizardType {
+        AGGRESSIVE, DEFENSIVE, SUSTAINING, STRATEGIC,
+    };
+
+    WizardType our_type, op_type;
+
+    uint8_t flask_times[6]; // health: N, E, S, W; mana: NW, SE
+    void update_flask_timers();
+
+    std::vector<StackFrame> gen_aggressive();
+    std::vector<StackFrame> gen_defensive();
+    std::vector<StackFrame> gen_sustaining();
+    std::vector<StackFrame> gen_strategic();
+
+    std::vector<StackFrame> gen_frames(StackFrame &prev); // calls other gens and does pruning
+
+    uint64_t get_sum(StackFrame &frame, int depth);
+
+    void evaluate_frame(StackFrame &frame);
 
 };
 

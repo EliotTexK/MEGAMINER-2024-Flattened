@@ -2,6 +2,11 @@
 // This is where you build your AI
 
 #include "ai.hpp"
+#include <iostream>
+#include <random>
+#include <vector>
+
+using namespace std;
 
 // <<-- Creer-Merge: includes -->> - Code you add between this comment and the end comment will be preserved between Creer re-runs.
 // You can add #includes here for your AI.
@@ -22,7 +27,7 @@ std::string AI::get_name() const
 {
     // <<-- Creer-Merge: get-name -->> - Code you add between this comment and the end comment will be preserved between Creer re-runs.
     // REPLACE WITH YOUR TEAM NAME!
-    return "Magomachy C++ Player";
+    return "TreeChoppa";
     // <<-- /Creer-Merge: get-name -->>
 }
 
@@ -91,6 +96,26 @@ bool AI::run_turn()
     // <<-- Creer-Merge: runTurn -->> - Code you add between this comment and the end comment will be preserved between Creer re-runs.
     // Put your game logic here for run_turn here
     // <<-- /Creer-Merge: runTurn -->>
+    static int turn = 0;
+    if (turn == 0) {
+        player->choose_wizard("aggressive");
+        turn++;
+        return true;
+    }
+
+    for (int i = 0; player->wizard->movement_left; i++) {
+        Tile move_to;
+        auto neighbors = player->wizard->tile->get_neighbors();
+        vector<Tile> valid_nbrs;
+        for (auto nbr : neighbors) {
+            if (nbr->type != "wall") {
+                valid_nbrs.push_back(nbr);
+            }
+        }
+        move_to = valid_nbrs.at(rand() % valid_nbrs.size());
+        player->wizard->move(move_to);
+    }
+    turn++;
     return true;
 }
 

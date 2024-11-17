@@ -32,7 +32,7 @@ export class Item extends makeRenderable(GameObject, SHOULD_RENDER) {
     // <<-- Creer-Merge: variables -->>
     // You can add additional member variables here
 
-    public sprite: PIXI.Sprite;
+    public sprite: PIXI.Sprite | undefined;
     public particleSprite: PIXI.Sprite | null;
     // <<-- /Creer-Merge: variables -->>
 

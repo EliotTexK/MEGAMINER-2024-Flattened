@@ -67,7 +67,7 @@ export class Game extends BaseGame {
         game: this.createLayer(),
         wiz_a: this.createLayer(),
         wiz_b: this.createLayer(),
-        item_used: this.createLayer();
+        item_used: this.createLayer(),
         /** Top layer, for UI elements above the game. */
         ui: this.createLayer(),
         // <<-- /Creer-Merge: layers -->>

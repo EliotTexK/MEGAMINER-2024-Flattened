@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "target": "esnext",
+        "target": "es6",
         "module": "commonjs",
         "moduleResolution": "node",
         "importHelpers": true,
@@ -20,6 +20,7 @@
         "baseUrl": "./",
         "paths": {
             //"~/*" : ["src/*"] // resolve any `~/foo/bar` to `<baseUrl>/src/foo/bar`
-        }
+        },
+
     }
 }

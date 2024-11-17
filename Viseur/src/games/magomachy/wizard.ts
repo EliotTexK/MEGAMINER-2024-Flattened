@@ -1,6 +1,8 @@
+// @ts-nocheck
+
 // This is a class to represent the Wizard object in the game.
 // If you want to render it in the game do so here.
-import { ease, Immutable, PixiSpriteOptions } from "src/utils";
+import { ease, Immutable } from "src/utils";
 import { Viseur } from "src/viseur";
 import { makeRenderable } from "src/viseur/game";
 import { GameObject } from "./game-object";
@@ -69,7 +71,7 @@ export class Wizard extends makeRenderable(GameObject, SHOULD_RENDER) {
     constructor(state: WizardState, viseur: Viseur) {
         super(state, viseur);
 
-        PIXI.SCALE_MODES.DEFAULT = PIXI.SCALE_MODES.NEAREST;
+        // PIXI.SCALE_MODES.DEFAULT = PIXI.SCALE_MODES.NEAREST;
         PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 
         // <<-- Creer-Merge: constructor -->>
@@ -195,7 +197,7 @@ export class Wizard extends makeRenderable(GameObject, SHOULD_RENDER) {
         dt: number,
         current: Immutable<WizardState>,
         next: Immutable<WizardState>,
-        delta: Immutable<MagomachyDelta>
+        delta: Immutable<MagomachyDelta>,
         nextDelta: Immutable<MagomachyDelta>,
     ): void {
         super.render(dt, current, next, delta, nextDelta);

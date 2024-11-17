@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { Immutable } from "src/utils";
 import { Viseur } from "src/viseur";
 import { BasePane, PaneStat } from "src/viseur/game";

@@ -42,6 +42,7 @@ enum RuneType {
 
 struct StackFrame {
     int64_t value;
+    bool is_my_turn;
     Move move[5];
     struct {
         uint8_t x, y;
@@ -146,17 +147,17 @@ public:
         AGGRESSIVE, DEFENSIVE, SUSTAINING, STRATEGIC,
     };
 
-    WizardType our_type, op_type;
+    WizardType my_type, op_type;
 
     uint8_t flask_times[6]; // health: N, E, S, W; mana: NW, SE
     void update_flask_timers();
 
-    std::vector<StackFrame> gen_aggressive(StackFrame &prev);
-    std::vector<StackFrame> gen_defensive(StackFrame &prev);
-    std::vector<StackFrame> gen_sustaining(StackFrame &prev);
-    std::vector<StackFrame> gen_strategic(StackFrame &prev);
+    std::vector<StackFrame> gen_aggressive(StackFrame &curr);
+    std::vector<StackFrame> gen_defensive(StackFrame &curr);
+    std::vector<StackFrame> gen_sustaining(StackFrame &curr);
+    std::vector<StackFrame> gen_strategic(StackFrame &curr);
 
-    std::vector<StackFrame> gen_frames(StackFrame &prev); // calls other gens and does pruning
+    std::vector<StackFrame> gen_frames(StackFrame &curr); // calls other gens and does pruning
 
     uint64_t get_sum(StackFrame &frame, int depth);
 

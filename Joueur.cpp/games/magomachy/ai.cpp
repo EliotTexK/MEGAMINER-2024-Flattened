@@ -202,47 +202,48 @@ std::vector<Tile> AI::find_path(const Tile& start, const Tile& goal)
 // You can add additional methods here for your AI to call
 //<<-- /Creer-Merge: methods -->>
 
-std::vector<StackFrame> AI::gen_aggressive(StackFrame &prev) {
+std::vector<StackFrame> AI::gen_aggressive(StackFrame &curr) {
 
 }
 
-std::vector<StackFrame> AI::gen_defensive(StackFrame &prev) {
+std::vector<StackFrame> AI::gen_defensive(StackFrame &curr) {
 
 }
 
-std::vector<StackFrame> AI::gen_sustaining(StackFrame &prev) {
+std::vector<StackFrame> AI::gen_sustaining(StackFrame &curr) {
 
 }
 
-std::vector<StackFrame> AI::gen_strategic(StackFrame &prev) {
+std::vector<StackFrame> AI::gen_strategic(StackFrame &curr) {
 
 }
 
 
 static constexpr size_t TRUNC_SIZE = 100;
-std::vector<StackFrame> AI::gen_frames(StackFrame &prev){
+std::vector<StackFrame> AI::gen_frames(StackFrame &curr){
     std::vector<StackFrame> ret;
-    switch (our_type) {
+    WizardType& type = curr.is_my_turn? my_type : op_type;
+    switch (type) {
         case WizardType::AGGRESSIVE:
-            ret = gen_aggressive();
+            ret = gen_aggressive(curr);
             break;
         case AI::WizardType::DEFENSIVE:
-            ret = gen_defensive();
+            ret = gen_defensive(curr);
             break;
         case AI::WizardType::SUSTAINING:
-            ret = gen_sustaining();
+            ret = gen_sustaining(curr);
             break;
         case AI::WizardType::STRATEGIC:
-            ret = gen_strategic();
+            ret = gen_strategic(curr);
             break;
     }
-    // get frame values
+    // apply moves, invert turn, and calculate score
     for (auto &frame : ret) {
         evaluate_frame(frame);
     }
     // prune by truncating lowest values
     std::sort(ret.begin(), ret.end(), 
-        [](StackFrame &item1, StackFrame &item2)->{
+        [](StackFrame &item1, StackFrame &item2)->bool{
             return item1.value > item2.value;
         });
     if (ret.size() > TRUNC_SIZE) {
@@ -252,6 +253,11 @@ std::vector<StackFrame> AI::gen_frames(StackFrame &prev){
 }
 
 void AI::evaluate_frame(StackFrame &frame) {
+    // apply moves
+    
+    //invert turn
+    frame.is_my_turn = !frame.is_my_turn;
+    // calculate score
     frame.value = 0;
     frame.value += frame.wizard.hp;
     frame.value += frame.wizard.mp;

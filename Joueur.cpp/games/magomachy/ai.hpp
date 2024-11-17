@@ -40,6 +40,29 @@ public:
 
     //<<-- Creer-Merge: class variables -->> - Code you add between this comment and the end comment will be preserved between Creer re-runs.
     // You can add additional class variables here.
+
+    bool wall_map[10][10] = {
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+        {1, 0, 1, 0, 1, 1, 0, 1, 0, 1 },
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+        {1, 0, 1, 0, 0, 0, 0, 1, 0, 1 },
+        {1, 0, 1, 0, 0, 0, 0, 1, 0, 1 },
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+        {1, 0, 1, 0, 1, 1, 0, 1, 0, 1 },
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+    };
+    bool sight_map[10][10];
+
+    int dists_to_op[10][10];
+    void calc_bfs();
+    Tile bressenham(int x0, int y0, int x1, int y1, Tile current);
+    bool is_in_sight(Tile sniper, Tile target);
+    void calc_sight();
+
+    Tile get_closer(Tile curr);
+
     //<<-- /Creer-Merge: class variables -->>
 
     /// <summary>

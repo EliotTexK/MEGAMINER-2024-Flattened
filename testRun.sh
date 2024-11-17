@@ -12,4 +12,5 @@ make
 sleep 5
 
 ./run magomachy &
-./run magomachy
+cd ../Joueur.py
+python3 main.py magomachy

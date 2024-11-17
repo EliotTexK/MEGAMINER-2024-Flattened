@@ -85,6 +85,7 @@ class AI(BaseAI):
         return -1
         # <<-- /Creer-Merge: Move -->>
     def run_turn(self) -> bool:
+        print(self.player.wizard)
         """This is called every time it is this AI.player's turn.
 
         Returns:
